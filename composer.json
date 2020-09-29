@@ -1,0 +1,41 @@
+{
+    "name": "hiddencorporation/laravel-db-config",
+    "version": "1.0.0",
+    "description": ":A package for laravel to handle configuration data set",
+    "license": "MIT",
+    "authors": [{
+        "name": "Aurélien Lanos",
+        "email": "aurelien.lanos@hiddencorporation.com"
+    }],
+    "homepage": "https://github.com/hiddenCorporation/laravel-db-config",
+    "keywords": ["php", "Laravel", "package", "Configuration", "db"],
+    "require": {
+        "illuminate/support": "~5|~6"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.0",
+        "mockery/mockery": "^1.1",
+        "orchestra/testbench": "~3|~4",
+        "sempro/phpunit-pretty-print": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "hiddenCorporation\\dbConfig\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "hiddenCorporation\\dbConfig\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "hiddenCorporation\\dbConfig\\dbConfigServiceProvider"
+            ],
+            "aliases": {
+                "dbConfig": "hiddenCorporation\\dbConfig\\Facades\\dbConfig"
+            }
+        }
+    }
+}
