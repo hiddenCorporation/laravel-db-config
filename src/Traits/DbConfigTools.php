@@ -1,5 +1,5 @@
 <?php
-namespace Hephaistos\dbConfig\Traits;
+namespace hiddenCorporation\dbConfig\Traits;
 
 use Illuminate\Support\Str;
 use Illuminate\Encryption\Encrypter;
