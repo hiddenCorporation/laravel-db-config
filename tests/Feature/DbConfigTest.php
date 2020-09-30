@@ -5,9 +5,12 @@ namespace hiddenCorporation\dbConfig\Tests\Feature;
 use stdClass;
 use Tests\TestCase;
 use hiddenCorporation\dbConfig\dbConfig;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class DbConfigTest extends TestCase
 {
+
+    use DatabaseMigrations;
     /**
      * Injection string
      *

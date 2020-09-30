@@ -603,7 +603,7 @@ class dbConfig
     /**
      * configExist
      *
-     * @param  mixed $entity $entity id or technical_name or array of both
+     * @param  mixed $entity $entity id or technical_name
      * @param  mixed $infoSup boolean to get more intel about where the config has been found.
      * @return mixed 'cache','db or true or false depends if infoSup is true
      */
