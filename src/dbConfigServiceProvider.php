@@ -1,7 +1,11 @@
 <?php
 
 namespace hiddenCorporation\dbConfig;
+
 use Illuminate\Support\ServiceProvider;
+use hiddenCorporation\dbConfig\dbConfig;
+use hiddenCorporation\dbConfig\App\Commands\dbConfigTest;
+use hiddenCorporation\dbConfig\App\Commands\dbConfigClear;
 
 class dbConfigServiceProvider extends ServiceProvider
 {
@@ -12,7 +16,7 @@ class dbConfigServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
 
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
@@ -27,7 +31,7 @@ class dbConfigServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/dbConfig.php', 'dbConfig');
+        $this->mergeConfigFrom(__DIR__ . '/../config/dbConfig.php', 'dbConfig');
 
         // Register the service the package provides.
         $this->app->singleton('dbConfig', function ($app) {
@@ -53,7 +57,7 @@ class dbConfigServiceProvider extends ServiceProvider
     protected function bootForConsole()
     {
         // Publishing the configuration file.
-        $this->publishes([__DIR__.'/../config/dbConfig.php' => config_path('dbConfig.php')], 'dbConfig.config');
+        $this->publishes([__DIR__ . '/../config/dbConfig.php' => config_path('dbConfig.php')], 'dbConfig.config');
 
         // Publishing test command.
         /*
@@ -64,11 +68,8 @@ class dbConfigServiceProvider extends ServiceProvider
 
         // Registering package commands.
         $this->commands([
-            App\Commands\dbConfigTest::class,
-            App\Commands\dbConfigClear::class
+            dbConfigTest::class,
+            dbConfigClear::class
         ]);
-
-
-
     }
 }
