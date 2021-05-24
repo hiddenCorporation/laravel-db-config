@@ -15,7 +15,7 @@ class dbConfigTest extends Command
      *
      * @var string
      */
-    protected $signature = 'dbConfig:test {--operation=}';
+    protected $signature = 'dbconfig:test {--operation=}';
 
     /**
      * The console command description.
@@ -128,32 +128,20 @@ class dbConfigTest extends Command
         $obj->element3=3;
         $tmp = dbConfig::set('object-test',$obj);
 
-        $listToAsk=['string-test','array-test'];
-        if(config('dbConfig.useCache')){
-            $id=intval(dbConfig::getConfigKeyByCache('object-test'));
-            if($id){
-                $listToAsk[]=$id;
-            }
-            else{
-                $listToAsk[]='object-test';
-            }
-        }
+        $listToAsk=['string-test','array-test','object-test'];
 
-        $list=dbConfig::get($listToAsk,Null,true);
+        $list=dbConfig::getMultiple($listToAsk,Null,true);
         $test=[];
-        $test[] = (count($list)==3)?true:false;
-        $test[] = (array_key_exists('string-test',$list) && array_key_exists('array-test',$list) && array_key_exists('object-test',$list))?true:false;
-        $test[] = (isset($list['object-test']->full_value) && isset($list['object-test']->full_value->element1) && $list['object-test']->full_value->element1 == 1)?true:false;
+        $test[] = (count($list) == 3)?true:false;
+        $test[] = (array_key_exists('string-test',$list) && array_key_exists('array-test',$list) && (array_key_exists('object-test',$list))  )?true:false;
         $test[] = (isset($list['string-test']->cache) && $list['string-test']->cache == 'noCache')?true:false;
-        $list=dbConfig::get($listToAsk);
-        $test[] = count($list)==3?true:false;
-        $test[] = (array_key_exists('string-test',$list) && array_key_exists('array-test',$list) && array_key_exists('object-test',$list))?true:false;
-        $test[] = $list['string-test']=='test'?true:false;
         $test[] = dbConfig::unset(['string-test','array-test','object-test'])==true?true:false;
+
         if(in_array(false, $test, true) === false){
             return true;
         }
         return false;
+
     }
 
     protected function testgetCollectionCache()
@@ -179,7 +167,7 @@ class dbConfigTest extends Command
 
         $listToAsk[]='string-test';
 
-        $list=dbConfig::get($listToAsk,Null,true);
+        $list=dbConfig::getMultiple($listToAsk,Null,true);
         $test[] = count($list)==2?true:false;
         $test[] = (array_key_exists('string-test',$list) && array_key_exists('array-test',$list))?true:false;
         $test[] = (isset($list['string-test']->cache) && $list['string-test']->cache == 'cached')?true:(config('dbConfig.useCache')?false:true);
@@ -215,7 +203,7 @@ class dbConfigTest extends Command
 
         $listToAsk[]='string-test';
 
-        $list=dbConfig::get($listToAsk,Null,true);
+        $list=dbConfig::getMultiple($listToAsk,Null,true);
         $test[] = count($list)==2?true:false;
         $test[] = (array_key_exists('string-test',$list) && array_key_exists('array-test',$list))?true:false;
         $test[] = (isset($list['string-test']->cache) && $list['string-test']->cache == 'noCache')?true:false;

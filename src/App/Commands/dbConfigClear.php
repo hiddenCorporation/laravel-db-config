@@ -14,7 +14,7 @@ class dbConfigClear extends Command
      *
      * @var string
      */
-    protected $signature = 'dbConfig:clear {--which=}';
+    protected $signature = 'dbconfig:clear {--which=}';
 
     /**
      * The console command description.
