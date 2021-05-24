@@ -1,6 +1,5 @@
 {
     "name": "hiddencorporation/laravel-db-config",
-    "version": "1.0.0",
     "description": ":A package for laravel to handle configuration data set",
     "license": "MIT",
     "authors": [{
